@@ -54,7 +54,7 @@ public abstract class AbstractValidatingSessionManager extends AbstractNativeSes
     /**
      * Scheduler used to validate sessions on a regular basis.
      */
-    protected SessionValidationScheduler sessionValidationScheduler;
+    protected volatile SessionValidationScheduler sessionValidationScheduler;
 
     protected long sessionValidationInterval;
 
@@ -83,7 +83,12 @@ public abstract class AbstractValidatingSessionManager extends AbstractNativeSes
     private void enableSessionValidationIfNecessary() {
         SessionValidationScheduler scheduler = getSessionValidationScheduler();
         if (isSessionValidationSchedulerEnabled() && (scheduler == null || !scheduler.isEnabled())) {
-            enableSessionValidation();
+            synchronized(this) {
+                scheduler = getSessionValidationScheduler();
+                if (scheduler == null || !scheduler.isEnabled()) {
+                    enableSessionValidation();
+                }
+            }
         }
     }
 
@@ -220,7 +225,7 @@ public abstract class AbstractValidatingSessionManager extends AbstractNativeSes
         return scheduler;
     }
 
-    protected void enableSessionValidation() {
+    protected synchronized void enableSessionValidation() {
         SessionValidationScheduler scheduler = getSessionValidationScheduler();
         if (scheduler == null) {
             scheduler = createSessionValidationScheduler();
@@ -236,7 +241,7 @@ public abstract class AbstractValidatingSessionManager extends AbstractNativeSes
     protected void afterSessionValidationEnabled() {
     }
 
-    protected void disableSessionValidation() {
+    protected synchronized void disableSessionValidation() {
         beforeSessionValidationDisabled();
         SessionValidationScheduler scheduler = getSessionValidationScheduler();
         if (scheduler != null) {
