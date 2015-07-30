@@ -30,7 +30,7 @@
     <groupId>org.apache.shiro</groupId>
     <artifactId>shiro-root</artifactId>
     <packaging>pom</packaging>
-    <version>1.2.4</version>
+    <version>1.2.4-collaborne-1-SNAPSHOT</version>
 
     <name>Apache Shiro</name>
     <url>http://shiro.apache.org/</url>
@@ -41,26 +41,14 @@
     <inceptionYear>2004</inceptionYear>
 
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/shiro/tags/shiro-root-1.2.4</connection>
-        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/shiro/tags/shiro-root-1.2.4</developerConnection>
-        <url>http://svn.apache.org/repos/asf/shiro/tags/shiro-root-1.2.4</url>
+        <url>https://github.com/Collaborne/shiro</url>
+        <connection>scm:git:git://github.com/Collaborne/shiro.git</connection>
+        <developerConnection>${project.scm.connection}</developerConnection>
     </scm>
     <issueManagement>
-        <system>Jira</system>
-        <url>http://issues.apache.org/jira/browse/SHIRO</url>
+        <system>GitHub Issues</system>
+        <url>https://github.com/Collaborne/shiro/issues</url>
     </issueManagement>
-    <ciManagement>
-        <system>Hudson</system>
-        <url>http://hudson.zones.apache.org/hudson/view/Shiro/</url>
-    </ciManagement>
-
-    <distributionManagement>
-        <site>
-            <id>shiro.website</id>
-            <name>Apache Shiro Site</name>
-            <url>scm:svn:https://svn.apache.org/repos/asf/shiro/site/publish/static/latest</url>
-        </site>
-    </distributionManagement>
 
     <properties>
 
@@ -412,7 +400,7 @@
                 -->
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>buildnumber-maven-plugin</artifactId>
-                <version>1.0-beta-4</version>
+                <version>1.3</version>
                 <executions>
                     <execution>
                         <phase>validate</phase>
@@ -457,16 +445,6 @@
                     <goals>deploy site site:stage</goals>
                     <arguments>-Pdocs,apache-release</arguments>
                     <mavenExecutorId>forked-path</mavenExecutorId>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <nexusUrl>https://repository.apache.org</nexusUrl>
-                    <serverId>apache.releases.https</serverId>
                 </configuration>
             </plugin>
         </plugins>
