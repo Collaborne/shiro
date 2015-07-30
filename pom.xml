@@ -357,29 +357,6 @@
                     <printSummary>true</printSummary>
                 </configuration>
             </plugin>
-            <!-- repository.apache.org doesn't accept connections from jdk 1.6 (https://issues.apache.org/jira/browse/BUILDS-85) so use toolchains
-            to require jdk 1.6 for compiling but deploy using a newer jdk
-            -->
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-toolchains-plugin</artifactId>
-              <version>1.1</version>
-              <configuration>
-                <toolchains>
-                  <jdk>
-                    <version>${jdk.version}</version>
-                    <vendor>sun</vendor>
-                  </jdk>
-                </toolchains>               
-              </configuration>
-              <executions>
-                <execution>
-                  <goals>
-                    <goal>toolchain</goal>
-                  </goals>
-                </execution>
-              </executions>
-            </plugin>
             <!-- Allow Groovy tests to run: -->
             <plugin>
                 <groupId>org.codehaus.gmaven</groupId>
@@ -1009,6 +986,33 @@
         </profile>
         <profile>
             <id>apache-release</id>
+            <build>
+                <plugins>
+                    <!-- repository.apache.org doesn't accept connections from jdk 1.6 (https://issues.apache.org/jira/browse/BUILDS-85) so use toolchains
+                    to require jdk 1.6 for compiling but deploy using a newer jdk
+                    -->
+                    <plugin>
+                      <groupId>org.apache.maven.plugins</groupId>
+                      <artifactId>maven-toolchains-plugin</artifactId>
+                      <version>1.1</version>
+                      <configuration>
+                        <toolchains>
+                          <jdk>
+                            <version>${jdk.version}</version>
+                            <vendor>sun</vendor>
+                          </jdk>
+                        </toolchains>
+                      </configuration>
+                      <executions>
+                        <execution>
+                          <goals>
+                            <goal>toolchain</goal>
+                          </goals>
+                        </execution>
+                      </executions>
+                    </plugin>
+                </plugins>
+            </build>
             <distributionManagement>
                 <site>
                     <id>shiro.website</id>
