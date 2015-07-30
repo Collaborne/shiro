@@ -185,12 +185,12 @@
     <distributionManagement>
         <repository>
             <id>collaborne-thirdparty-repository</id>
-            <url>${env.CI_DEPLOY_RELEASE_REPOSITORY_URL}</url>
+            <url>s3://collaborne-repository/maven/thirdparty</url>
             <layout>default</layout>
         </repository>
         <snapshotRepository>
             <id>collaborne-thirdparty-snapshot-repository</id>
-            <url>${env.CI_DEPLOY_SNAPSHOT_REPOSITORY_URL}</url>
+            <url>s3://collaborne-repository/maven/thirdparty-snapshots</url>
             <layout>default</layout>
         </snapshotRepository>
     </distributionManagement>
