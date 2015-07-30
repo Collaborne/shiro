@@ -367,7 +367,7 @@
               <configuration>
                 <toolchains>
                   <jdk>
-                    <version>1.6</version>
+                    <version>${jdk.version}</version>
                     <vendor>sun</vendor>
                   </jdk>
                 </toolchains>               
