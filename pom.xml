@@ -216,6 +216,7 @@
                             <exclude>**/infinitest.filters</exclude>
                             <!-- Apparently some test in samples/spring-client generates velocity log - would better to reconfigure to output to target/ -->
                             <exclude>velocity.log</exclude>
+                            <exclude>.git/</exclude>
                         </excludes>
                     </configuration>
                 </plugin>
@@ -419,8 +420,8 @@
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <!-- This configuration copied from apache:apache:7 parent pom -->
                     <useReleaseProfile>false</useReleaseProfile>
-                    <goals>deploy site site:stage</goals>
-                    <arguments>-Pdocs,apache-release</arguments>
+                    <goals>deploy</goals>
+                    <arguments>-Pdocs</arguments>
                     <mavenExecutorId>forked-path</mavenExecutorId>
                 </configuration>
             </plugin>
@@ -895,6 +896,7 @@
                         <exclude>**/infinitest.filters</exclude>
                         <!-- Apparently some test in samples/spring-client generates velocity log - would better to reconfigure to output to target/ -->
                         <exclude>velocity.log</exclude>
+                        <exclude>.git/</exclude>
                     </excludes>
                 </configuration>
             </plugin>
