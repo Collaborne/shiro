@@ -1,0 +1,8 @@
+language: java
+after_success: "[ ${TRAVIS_PULL_REQUEST} = 'false' ] && [ ${TRAVIS_BRANCH} = 'shiro-root-1.2.4-collaborne' ] && mvn deploy -DskipTests=true -B --settings deploy-settings.xml"
+jdk:
+  - oraclejdk7
+script: mvn test
+caches:
+  directories:
+    - $HOME/.m2/repository

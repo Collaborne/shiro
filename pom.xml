@@ -182,7 +182,27 @@
         <module>all</module>
     </modules>
 
+    <distributionManagement>
+        <repository>
+            <id>collaborne-thirdparty-repository</id>
+            <url>${env.CI_DEPLOY_RELEASE_REPOSITORY_URL}</url>
+            <layout>default</layout>
+        </repository>
+        <snapshotRepository>
+            <id>collaborne-thirdparty-snapshot-repository</id>
+            <url>${env.CI_DEPLOY_SNAPSHOT_REPOSITORY_URL}</url>
+            <layout>default</layout>
+        </snapshotRepository>
+    </distributionManagement>
+
     <build>
+        <extensions>
+            <extension>
+                <groupId>org.kuali.maven.wagons</groupId>
+                <artifactId>maven-s3-wagon</artifactId>
+                <version>1.2.1</version>
+            </extension>
+        </extensions>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -217,6 +237,7 @@
                             <!-- Apparently some test in samples/spring-client generates velocity log - would better to reconfigure to output to target/ -->
                             <exclude>velocity.log</exclude>
                             <exclude>.git/</exclude>
+                            <exclude>.travis.yml</exclude>
                         </excludes>
                     </configuration>
                 </plugin>
@@ -897,6 +918,7 @@
                         <!-- Apparently some test in samples/spring-client generates velocity log - would better to reconfigure to output to target/ -->
                         <exclude>velocity.log</exclude>
                         <exclude>.git/</exclude>
+                        <exclude>.travis.yml</exclude>
                     </excludes>
                 </configuration>
             </plugin>
