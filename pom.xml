@@ -42,7 +42,7 @@
 
     <scm>
         <url>https://github.com/Collaborne/shiro</url>
-        <connection>scm:git:git://github.com/Collaborne/shiro.git</connection>
+        <connection>scm:git:https://github.com/Collaborne/shiro.git</connection>
         <developerConnection>${project.scm.connection}</developerConnection>
     </scm>
     <issueManagement>
