@@ -84,11 +84,11 @@ public abstract class ThreadContext {
      * @since 1.0
      */
     public static void setResources(Map<Object, Object> newResources) {
+        ensureResourcesInitialized();
+        resources.get().clear();
         if (CollectionUtils.isEmpty(newResources)) {
             return;
         }
-        ensureResourcesInitialized();
-        resources.get().clear();
         resources.get().putAll(newResources);
     }
 
