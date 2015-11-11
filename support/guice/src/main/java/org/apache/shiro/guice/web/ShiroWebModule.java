@@ -179,7 +179,7 @@ public abstract class ShiroWebModule extends ShiroModule {
     @SuppressWarnings({"unchecked"})
     @Override
     protected final void bindSecurityManager(AnnotatedBindingBuilder<? super SecurityManager> bind) {
-        bindWebSecurityManager(bind);
+        bind.to(WebSecurityManager.class);
     }
 
     /**
@@ -211,7 +211,7 @@ public abstract class ShiroWebModule extends ShiroModule {
 
     @Override
     protected final void bindEnvironment(AnnotatedBindingBuilder<Environment> bind) {
-        bindWebEnvironment(bind);
+        bind.to(WebEnvironment.class);
     }
 
     protected void bindWebEnvironment(AnnotatedBindingBuilder<? super WebEnvironment> bind) {
