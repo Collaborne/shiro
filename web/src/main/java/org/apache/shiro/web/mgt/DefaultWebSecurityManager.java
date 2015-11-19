@@ -72,7 +72,6 @@ public class DefaultWebSecurityManager extends DefaultSecurityManager implements
         ((DefaultSubjectDAO) this.subjectDAO).setSessionStorageEvaluator(new DefaultWebSessionStorageEvaluator());
         this.sessionMode = HTTP_SESSION_MODE;
         setSubjectFactory(new DefaultWebSubjectFactory());
-        setRememberMeManager(new CookieRememberMeManager());
         setSessionManager(new ServletContainerSessionManager());
     }
 
