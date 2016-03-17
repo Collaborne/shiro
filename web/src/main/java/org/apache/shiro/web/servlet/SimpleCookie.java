@@ -362,8 +362,14 @@ public class SimpleCookie implements Cookie {
         String value = null;
         javax.servlet.http.Cookie cookie = getCookie(request, name);
         if (cookie != null) {
-            value = cookie.getValue();
-            log.debug("Found '{}' cookie value [{}]", name, value);
+            // Validate that the cookie is used at the correct place.
+            String path = StringUtils.clean(getPath());
+            if (path != null && !request.getRequestURI().startsWith(path)) {
+                log.warn("Found '{}' cookie at path '{}', but should be only used for '{}'", new Object[] { name, request.getRequestURI(), path});
+            } else {
+                value = cookie.getValue();
+                log.debug("Found '{}' cookie value [{}]", name, value);
+            }
         } else {
             log.trace("No '{}' cookie value", name);
         }
