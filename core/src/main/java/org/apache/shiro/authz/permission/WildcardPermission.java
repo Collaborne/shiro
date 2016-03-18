@@ -147,11 +147,15 @@ public class WildcardPermission implements Permission, Serializable {
     }
 
     protected void setParts(String wildcardString, boolean caseSensitive) {
-        if (wildcardString == null || wildcardString.trim().length() == 0) {
-            throw new IllegalArgumentException("Wildcard string cannot be null or empty. Make sure permission strings are properly formatted.");
+        if (wildcardString == null) {
+            throw new IllegalArgumentException("Wildcard string cannot be null. Make sure permission strings are properly formatted.");
         }
 
         wildcardString = wildcardString.trim();
+
+        if (wildcardString.isEmpty()) {
+            throw new IllegalArgumentException("Wildcard string cannot be empty. Make sure permission strings are properly formatted.");
+        }
 
         List<String> parts = CollectionUtils.asList(wildcardString.split(PART_DIVIDER_TOKEN));
 
