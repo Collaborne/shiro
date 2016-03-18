@@ -20,6 +20,7 @@ package org.apache.shiro.authz.permission;
 
 import org.apache.shiro.authz.Permission;
 import org.apache.shiro.util.CollectionUtils;
+import org.apache.shiro.util.StringUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -147,14 +148,10 @@ public class WildcardPermission implements Permission, Serializable {
     }
 
     protected void setParts(String wildcardString, boolean caseSensitive) {
-        if (wildcardString == null) {
-            throw new IllegalArgumentException("Wildcard string cannot be null. Make sure permission strings are properly formatted.");
-        }
+        wildcardString = StringUtils.clean(wildcardString);
 
-        wildcardString = wildcardString.trim();
-
-        if (wildcardString.isEmpty()) {
-            throw new IllegalArgumentException("Wildcard string cannot be empty. Make sure permission strings are properly formatted.");
+        if (wildcardString == null || wildcardString.isEmpty()) {
+            throw new IllegalArgumentException("Wildcard string cannot be null or empty. Make sure permission strings are properly formatted.");
         }
 
         List<String> parts = CollectionUtils.asList(wildcardString.split(PART_DIVIDER_TOKEN));
